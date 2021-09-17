@@ -16,6 +16,8 @@
         </div>
       </div>
     </div>
+
+    <!-- num pagina previos and next -->
     <div class="container mt-5">
       <nav aria-label="Page navigation example">
         <ul class="pagination">
@@ -25,12 +27,22 @@
           </li>
 
           <li class="page-item"
+            :class="{'active' : currentPage == i}"
+            v-for="i in lastPage" :key="i"
+            @click="getPosts(i)">
+              <a class="page-link" href="#"> {{ i }} </a>
+          </li>
+
+
+          <li class="page-item"
           :class="{'disabled' : currentPage === lastPage}">
             <button class="page-link" href="#" @click="getPosts(currentPage + 1)">Next</button>
           </li>
         </ul>
       </nav>
     </div>
+    <!-- end num pagina previos and next -->
+
   </main>
 </template>
 

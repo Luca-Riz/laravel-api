@@ -2266,6 +2266,18 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Main",
   data: function data() {
@@ -38126,53 +38138,79 @@ var render = function() {
     _vm._v(" "),
     _c("div", { staticClass: "container mt-5" }, [
       _c("nav", { attrs: { "aria-label": "Page navigation example" } }, [
-        _c("ul", { staticClass: "pagination" }, [
-          _c(
-            "li",
-            {
-              staticClass: "page-item",
-              class: { disabled: _vm.currentPage === 1 }
-            },
-            [
-              _c(
-                "button",
+        _c(
+          "ul",
+          { staticClass: "pagination" },
+          [
+            _c(
+              "li",
+              {
+                staticClass: "page-item",
+                class: { disabled: _vm.currentPage === 1 }
+              },
+              [
+                _c(
+                  "button",
+                  {
+                    staticClass: "page-link",
+                    attrs: { href: "#" },
+                    on: {
+                      click: function($event) {
+                        return _vm.getPosts(_vm.currentPage - 1)
+                      }
+                    }
+                  },
+                  [_vm._v("Previous")]
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _vm._l(_vm.lastPage, function(i) {
+              return _c(
+                "li",
                 {
-                  staticClass: "page-link",
-                  attrs: { href: "#" },
+                  key: i,
+                  staticClass: "page-item",
+                  class: { active: _vm.currentPage == i },
                   on: {
                     click: function($event) {
-                      return _vm.getPosts(_vm.currentPage - 1)
+                      return _vm.getPosts(i)
                     }
                   }
                 },
-                [_vm._v("Previous")]
+                [
+                  _c("a", { staticClass: "page-link", attrs: { href: "#" } }, [
+                    _vm._v(" " + _vm._s(i) + " ")
+                  ])
+                ]
               )
-            ]
-          ),
-          _vm._v(" "),
-          _c(
-            "li",
-            {
-              staticClass: "page-item",
-              class: { disabled: _vm.currentPage === _vm.lastPage }
-            },
-            [
-              _c(
-                "button",
-                {
-                  staticClass: "page-link",
-                  attrs: { href: "#" },
-                  on: {
-                    click: function($event) {
-                      return _vm.getPosts(_vm.currentPage + 1)
+            }),
+            _vm._v(" "),
+            _c(
+              "li",
+              {
+                staticClass: "page-item",
+                class: { disabled: _vm.currentPage === _vm.lastPage }
+              },
+              [
+                _c(
+                  "button",
+                  {
+                    staticClass: "page-link",
+                    attrs: { href: "#" },
+                    on: {
+                      click: function($event) {
+                        return _vm.getPosts(_vm.currentPage + 1)
+                      }
                     }
-                  }
-                },
-                [_vm._v("Next")]
-              )
-            ]
-          )
-        ])
+                  },
+                  [_vm._v("Next")]
+                )
+              ]
+            )
+          ],
+          2
+        )
       ])
     ])
   ])
