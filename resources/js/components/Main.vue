@@ -94,6 +94,7 @@ export default {
       let day = postData.getDate();
       let month = parseInt(postData.getMonth() + 1);
 
+        //prendiamo giorno, mese e anno
       if(day < 10){
         day = '0' + day;
       }
@@ -102,7 +103,7 @@ export default {
         month = '0' + month;
       }
 
-      //prendiamo giorno, mese e anno
+      //restituisce la data formattata
       return day + '/' + month + '/' + postData.getFullYear();
     }
   }

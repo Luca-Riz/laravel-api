@@ -2317,7 +2317,7 @@ __webpack_require__.r(__webpack_exports__);
       //creiamo un'istanza dell'oggetto date sulla data created_at
       var postData = new Date(data);
       var day = postData.getDate();
-      var month = parseInt(postData.getMonth() + 1);
+      var month = parseInt(postData.getMonth() + 1); //prendiamo giorno, mese e anno
 
       if (day < 10) {
         day = '0' + day;
@@ -2325,7 +2325,7 @@ __webpack_require__.r(__webpack_exports__);
 
       if (month < 10) {
         month = '0' + month;
-      } //prendiamo giorno, mese e anno
+      } //restituisce la data formattata
 
 
       return day + '/' + month + '/' + postData.getFullYear();
