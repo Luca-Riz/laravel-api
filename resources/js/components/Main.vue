@@ -19,11 +19,13 @@
     <div class="container mt-5">
       <nav aria-label="Page navigation example">
         <ul class="pagination">
-          <li class="page-item">
+          <li class="page-item" 
+          :class="{'disabled' : currentPage === 1}">
             <button class="page-link" href="#" @click="getPosts(currentPage - 1)">Previous</button>
           </li>
 
-          <li class="page-item">
+          <li class="page-item"
+          :class="{'disabled' : currentPage === lastPage}">
             <button class="page-link" href="#" @click="getPosts(currentPage + 1)">Next</button>
           </li>
         </ul>

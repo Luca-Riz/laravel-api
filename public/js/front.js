@@ -2264,6 +2264,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Main",
   data: function data() {
@@ -38125,37 +38127,51 @@ var render = function() {
     _c("div", { staticClass: "container mt-5" }, [
       _c("nav", { attrs: { "aria-label": "Page navigation example" } }, [
         _c("ul", { staticClass: "pagination" }, [
-          _c("li", { staticClass: "page-item" }, [
-            _c(
-              "button",
-              {
-                staticClass: "page-link",
-                attrs: { href: "#" },
-                on: {
-                  click: function($event) {
-                    return _vm.getPosts(_vm.currentPage - 1)
+          _c(
+            "li",
+            {
+              staticClass: "page-item",
+              class: { disabled: _vm.currentPage === 1 }
+            },
+            [
+              _c(
+                "button",
+                {
+                  staticClass: "page-link",
+                  attrs: { href: "#" },
+                  on: {
+                    click: function($event) {
+                      return _vm.getPosts(_vm.currentPage - 1)
+                    }
                   }
-                }
-              },
-              [_vm._v("Previous")]
-            )
-          ]),
+                },
+                [_vm._v("Previous")]
+              )
+            ]
+          ),
           _vm._v(" "),
-          _c("li", { staticClass: "page-item" }, [
-            _c(
-              "button",
-              {
-                staticClass: "page-link",
-                attrs: { href: "#" },
-                on: {
-                  click: function($event) {
-                    return _vm.getPosts(_vm.currentPage + 1)
+          _c(
+            "li",
+            {
+              staticClass: "page-item",
+              class: { disabled: _vm.currentPage === _vm.lastPage }
+            },
+            [
+              _c(
+                "button",
+                {
+                  staticClass: "page-link",
+                  attrs: { href: "#" },
+                  on: {
+                    click: function($event) {
+                      return _vm.getPosts(_vm.currentPage + 1)
+                    }
                   }
-                }
-              },
-              [_vm._v("Next")]
-            )
-          ])
+                },
+                [_vm._v("Next")]
+              )
+            ]
+          )
         ])
       ])
     ])
