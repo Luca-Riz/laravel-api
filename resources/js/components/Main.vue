@@ -9,7 +9,7 @@
           <div class="card mt-3">
             <div class="card-body">
               <h5 class="card-title">{{ post.title }}</h5>
-              <p class="card-text">{{ post.content }}</p>
+              <p class="card-text">{{ truncate(post.content, 150) }}</p>
               <a href="#" class="btn btn-primary">Dettagli</a>
             </div>
           </div>
@@ -76,8 +76,15 @@ export default {
 
           })
           .catch()
+    },
+
+    truncate(text,maxlength){
+      if(text.length > maxlength){
+        return text.substr(0,maxlength) + '...';
+      }
+
+      return text;
     }
-    
   }
 }
 </script>

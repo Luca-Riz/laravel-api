@@ -2304,6 +2304,13 @@ __webpack_require__.r(__webpack_exports__);
         _this.currentPage = response.data.results.current_page;
         _this.lastPage = response.data.results.last_page; // console.log(this.posts);
       })["catch"]();
+    },
+    truncate: function truncate(text, maxlength) {
+      if (text.length > maxlength) {
+        return text.substr(0, maxlength) + '...';
+      }
+
+      return text;
     }
   }
 });
@@ -38120,7 +38127,7 @@ var render = function() {
                 ]),
                 _vm._v(" "),
                 _c("p", { staticClass: "card-text" }, [
-                  _vm._v(_vm._s(post.content))
+                  _vm._v(_vm._s(_vm.truncate(post.content, 150)))
                 ]),
                 _vm._v(" "),
                 _c(
