@@ -1,17 +1,35 @@
 <template>
-  <div class="container">
-    <div class="row">
-      <div class="col-sm-6" v-for="post in posts" :key="post.id">
-        <div class="card mt-3">
-          <div class="card-body">
-            <h5 class="card-title">{{ post.title }}</h5>
-            <p class="card-text">{{ post.content }}</p>
-            <a href="#" class="btn btn-primary">Dettagli</a>
+  <main>
+    <div class="container mt-3">
+      <p>Pagina: {{ currentPage }} di {{ lastPage }} pagine totali</p>
+    </div>
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-6" v-for="post in posts" :key="post.id">
+          <div class="card mt-3">
+            <div class="card-body">
+              <h5 class="card-title">{{ post.title }}</h5>
+              <p class="card-text">{{ post.content }}</p>
+              <a href="#" class="btn btn-primary">Dettagli</a>
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
+    <div class="container mt-5">
+      <nav aria-label="Page navigation example">
+        <ul class="pagination">
+          <li class="page-item">
+            <button class="page-link" href="#" @click="getPosts(currentPage - 1)">Previous</button>
+          </li>
+
+          <li class="page-item">
+            <button class="page-link" href="#" @click="getPosts(currentPage + 1)">Next</button>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </main>
 </template>
 
 <script>
@@ -20,22 +38,32 @@ export default {
   data() {
     return {
       chiamataApi: 'http://127.0.0.1:8000/api/posts',
-      posts: []
+      posts: [],
+      currentPage: 1,
+      lastPage: null
     }
   },
   created(){
-    this.getPosts();
+    this.getPosts(1);
   },
   methods:{
-    getPosts(){
-      axios.get(this.chiamataApi)
+    getPosts(pagePost){
+      axios.get(this.chiamataApi, {
+        params: {
+          page: pagePost
+        }
+      })
           .then(response => {
-            this.posts = response.data.results;
-            // console.log(this.posts);
-          })
-          .catch();
-    }
 
+            this.posts = response.data.results.data;
+            this.currentPage = response.data.results.current_page;
+            this.lastPage = response.data.results.last_page;
+            // console.log(this.posts);
+
+          })
+          .catch()
+    }
+    
   }
 }
 </script>

@@ -2246,23 +2246,49 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Main",
   data: function data() {
     return {
       chiamataApi: 'http://127.0.0.1:8000/api/posts',
-      posts: []
+      posts: [],
+      currentPage: 1,
+      lastPage: null
     };
   },
   created: function created() {
-    this.getPosts();
+    this.getPosts(1);
   },
   methods: {
-    getPosts: function getPosts() {
+    getPosts: function getPosts(pagePost) {
       var _this = this;
 
-      axios.get(this.chiamataApi).then(function (response) {
-        _this.posts = response.data.results; // console.log(this.posts);
+      axios.get(this.chiamataApi, {
+        params: {
+          page: pagePost
+        }
+      }).then(function (response) {
+        _this.posts = response.data.results.data;
+        _this.currentPage = response.data.results.current_page;
+        _this.lastPage = response.data.results.last_page; // console.log(this.posts);
       })["catch"]();
     }
   }
@@ -38054,33 +38080,85 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "container" }, [
-    _c(
-      "div",
-      { staticClass: "row" },
-      _vm._l(_vm.posts, function(post) {
-        return _c("div", { key: post.id, staticClass: "col-sm-6" }, [
-          _c("div", { staticClass: "card mt-3" }, [
-            _c("div", { staticClass: "card-body" }, [
-              _c("h5", { staticClass: "card-title" }, [
-                _vm._v(_vm._s(post.title))
-              ]),
-              _vm._v(" "),
-              _c("p", { staticClass: "card-text" }, [
-                _vm._v(_vm._s(post.content))
-              ]),
-              _vm._v(" "),
-              _c(
-                "a",
-                { staticClass: "btn btn-primary", attrs: { href: "#" } },
-                [_vm._v("Dettagli")]
-              )
+  return _c("main", [
+    _c("div", { staticClass: "container mt-3" }, [
+      _c("p", [
+        _vm._v(
+          "Pagina: " +
+            _vm._s(_vm.currentPage) +
+            " di " +
+            _vm._s(_vm.lastPage) +
+            " pagine totali"
+        )
+      ])
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "container" }, [
+      _c(
+        "div",
+        { staticClass: "row" },
+        _vm._l(_vm.posts, function(post) {
+          return _c("div", { key: post.id, staticClass: "col-sm-6" }, [
+            _c("div", { staticClass: "card mt-3" }, [
+              _c("div", { staticClass: "card-body" }, [
+                _c("h5", { staticClass: "card-title" }, [
+                  _vm._v(_vm._s(post.title))
+                ]),
+                _vm._v(" "),
+                _c("p", { staticClass: "card-text" }, [
+                  _vm._v(_vm._s(post.content))
+                ]),
+                _vm._v(" "),
+                _c(
+                  "a",
+                  { staticClass: "btn btn-primary", attrs: { href: "#" } },
+                  [_vm._v("Dettagli")]
+                )
+              ])
             ])
           ])
+        }),
+        0
+      )
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "container mt-5" }, [
+      _c("nav", { attrs: { "aria-label": "Page navigation example" } }, [
+        _c("ul", { staticClass: "pagination" }, [
+          _c("li", { staticClass: "page-item" }, [
+            _c(
+              "button",
+              {
+                staticClass: "page-link",
+                attrs: { href: "#" },
+                on: {
+                  click: function($event) {
+                    return _vm.getPosts(_vm.currentPage - 1)
+                  }
+                }
+              },
+              [_vm._v("Previous")]
+            )
+          ]),
+          _vm._v(" "),
+          _c("li", { staticClass: "page-item" }, [
+            _c(
+              "button",
+              {
+                staticClass: "page-link",
+                attrs: { href: "#" },
+                on: {
+                  click: function($event) {
+                    return _vm.getPosts(_vm.currentPage + 1)
+                  }
+                }
+              },
+              [_vm._v("Next")]
+            )
+          ])
         ])
-      }),
-      0
-    )
+      ])
+    ])
   ])
 }
 var staticRenderFns = []
