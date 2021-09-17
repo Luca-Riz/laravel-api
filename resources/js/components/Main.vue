@@ -1,8 +1,8 @@
 <template>
   <main>
-    <div class="container mt-3">
+    <!-- <div class="container mt-3">
       <p>Pagina: {{ currentPage }} di {{ lastPage }} pagine totali</p>
-    </div>
+    </div> -->
     <div class="container">
       <div class="row">
         <div class="col-sm-6" v-for="post in posts" :key="post.id">
