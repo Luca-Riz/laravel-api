@@ -2250,13 +2250,22 @@ __webpack_require__.r(__webpack_exports__);
   name: "Main",
   data: function data() {
     return {
-      chiamataApi: 'http://127.0.0.1:8000/api/posts'
+      chiamataApi: 'http://127.0.0.1:8000/api/posts',
+      posts: []
     };
   },
   created: function created() {
-    console.log(this.chiamataApi);
+    this.getPosts();
   },
-  methods: {}
+  methods: {
+    getPosts: function getPosts() {
+      var _this = this;
+
+      axios.get(this.chiamataApi).then(function (response) {
+        _this.posts = response.data.results; // console.log(this.posts);
+      })["catch"]();
+    }
+  }
 });
 
 /***/ }),
@@ -38045,40 +38054,36 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "container" }, [
-      _c("div", { staticClass: "row" }, [
-        _c("div", { staticClass: "col-sm-6" }, [
-          _c("div", { staticClass: "card" }, [
+  return _c("div", { staticClass: "container" }, [
+    _c(
+      "div",
+      { staticClass: "row" },
+      _vm._l(_vm.posts, function(post) {
+        return _c("div", { key: post.id, staticClass: "col-sm-6" }, [
+          _c("div", { staticClass: "card mt-3" }, [
             _c("div", { staticClass: "card-body" }, [
               _c("h5", { staticClass: "card-title" }, [
-                _vm._v("Special title treatment")
+                _vm._v(_vm._s(post.title))
               ]),
               _vm._v(" "),
               _c("p", { staticClass: "card-text" }, [
-                _vm._v(
-                  "With supporting text below as a natural lead-in to additional content."
-                )
+                _vm._v(_vm._s(post.content))
               ]),
               _vm._v(" "),
               _c(
                 "a",
                 { staticClass: "btn btn-primary", attrs: { href: "#" } },
-                [_vm._v("Go somewhere")]
+                [_vm._v("Dettagli")]
               )
             ])
           ])
         ])
-      ])
-    ])
-  }
-]
+      }),
+      0
+    )
+  ])
+}
+var staticRenderFns = []
 render._withStripped = true
 
 
