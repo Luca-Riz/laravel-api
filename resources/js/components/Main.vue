@@ -9,6 +9,7 @@
           <div class="card mt-3">
             <div class="card-body">
               <h5 class="card-title">{{ post.title }}</h5>
+              <p>{{ formatData(post.created_at) }}</p>
               <p class="card-text">{{ truncate(post.content, 150) }}</p>
               <a href="#" class="btn btn-primary">Dettagli</a>
             </div>
@@ -84,6 +85,25 @@ export default {
       }
 
       return text;
+    },
+
+    formatData(data){
+      //creiamo un'istanza dell'oggetto date sulla data created_at
+      const postData = new Date(data);
+
+      let day = postData.getDate();
+      let month = parseInt(postData.getMonth() + 1);
+
+      if(day < 10){
+        day = '0' + day;
+      }
+
+      if(month < 10){
+        month = '0' + month;
+      }
+
+      //prendiamo giorno, mese e anno
+      return day + '/' + month + '/' + postData.getFullYear();
     }
   }
 }

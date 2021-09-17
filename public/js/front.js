@@ -2278,6 +2278,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Main",
   data: function data() {
@@ -2311,6 +2312,23 @@ __webpack_require__.r(__webpack_exports__);
       }
 
       return text;
+    },
+    formatData: function formatData(data) {
+      //creiamo un'istanza dell'oggetto date sulla data created_at
+      var postData = new Date(data);
+      var day = postData.getDate();
+      var month = parseInt(postData.getMonth() + 1);
+
+      if (day < 10) {
+        day = '0' + day;
+      }
+
+      if (month < 10) {
+        month = '0' + month;
+      } //prendiamo giorno, mese e anno
+
+
+      return day + '/' + month + '/' + postData.getFullYear();
     }
   }
 });
@@ -38125,6 +38143,8 @@ var render = function() {
                 _c("h5", { staticClass: "card-title" }, [
                   _vm._v(_vm._s(post.title))
                 ]),
+                _vm._v(" "),
+                _c("p", [_vm._v(_vm._s(_vm.formatData(post.created_at)))]),
                 _vm._v(" "),
                 _c("p", { staticClass: "card-text" }, [
                   _vm._v(_vm._s(_vm.truncate(post.content, 150)))
